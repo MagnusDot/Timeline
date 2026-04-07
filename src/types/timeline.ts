@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 
-export type TimelineStatus = "completed" | "in-progress" | "pending" | "warning";
+export type TimelineType = "cours" | "atelier" | "demo" | "mentorat" | "pause";
 
 export type TimelineStep = {
   id: number;
@@ -9,7 +9,7 @@ export type TimelineStep = {
   duration: string;
   format: string;
   objective: string;
-  status: TimelineStatus;
+  type: TimelineType;
 };
 
 export type TimelineMeta = {

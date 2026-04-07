@@ -1,13 +1,12 @@
 import type { HTMLAttributes, ReactNode, TimeHTMLAttributes } from "react";
-import { AlertCircle, Check, CircleDotDashed, Clock3 } from "lucide-react";
+import { BookOpenText, BriefcaseBusiness, Coffee, Presentation, Wrench } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-type TimelineStatus = "completed" | "in-progress" | "pending" | "warning";
+import type { TimelineType } from "@/types/timeline";
 
 type TimelineProps = HTMLAttributes<HTMLOListElement>;
 
 type TimelineItemProps = HTMLAttributes<HTMLLIElement> & {
-  status?: TimelineStatus;
+  type?: TimelineType;
   icon?: ReactNode;
   showConnector?: boolean;
 };
@@ -16,8 +15,8 @@ type TimelineTimeProps = TimeHTMLAttributes<HTMLTimeElement> & {
   date: string;
 };
 
-const statusStyles: Record<
-  TimelineStatus,
+const typeStyles: Record<
+  TimelineType,
   {
     dot: string;
     ring: string;
@@ -26,33 +25,40 @@ const statusStyles: Record<
     badge: string;
   }
 > = {
-  completed: {
+  cours: {
     dot: "bg-black text-white",
     ring: "ring-white",
-    icon: <Check className="h-4 w-4" strokeWidth={1.5} />,
-    label: "Termine",
+    icon: <BookOpenText className="h-4 w-4" strokeWidth={1.5} />,
+    label: "Cours",
     badge: "border-black bg-black text-white",
   },
-  "in-progress": {
+  atelier: {
     dot: "bg-white text-black",
     ring: "ring-black",
-    icon: <Clock3 className="h-4 w-4" strokeWidth={1.5} />,
-    label: "En cours",
+    icon: <Wrench className="h-4 w-4" strokeWidth={1.5} />,
+    label: "Atelier",
     badge: "border-black bg-white text-black",
   },
-  pending: {
+  demo: {
     dot: "bg-muted text-black",
     ring: "ring-white",
-    icon: <CircleDotDashed className="h-4 w-4" strokeWidth={1.5} />,
-    label: "A venir",
+    icon: <Presentation className="h-4 w-4" strokeWidth={1.5} />,
+    label: "Demo",
     badge: "border-borderLight bg-muted text-black",
   },
-  warning: {
+  mentorat: {
     dot: "bg-black text-white",
     ring: "ring-white",
-    icon: <AlertCircle className="h-4 w-4" strokeWidth={1.5} />,
-    label: "Point cle",
+    icon: <BriefcaseBusiness className="h-4 w-4" strokeWidth={1.5} />,
+    label: "Mentorat",
     badge: "border-black bg-black text-white",
+  },
+  pause: {
+    dot: "bg-white text-black",
+    ring: "ring-black",
+    icon: <Coffee className="h-4 w-4" strokeWidth={1.5} />,
+    label: "Pause",
+    badge: "border-black bg-white text-black",
   },
 };
 
@@ -62,13 +68,13 @@ export function Timeline({ className, ...props }: TimelineProps) {
 
 export function TimelineItem({
   className,
-  status = "completed",
+  type = "cours",
   icon,
   showConnector = true,
   children,
   ...props
 }: TimelineItemProps) {
-  const style = statusStyles[status];
+  const style = typeStyles[type];
 
   return (
     <li className={cn("group relative pb-10 last:pb-0", className)} {...props}>
@@ -112,14 +118,14 @@ export function TimelineTime({ className, date, ...props }: TimelineTimeProps) {
   );
 }
 
-export function TimelineStatusBadge({
-  status,
+export function TimelineTypeBadge({
+  type,
   className,
 }: {
-  status: TimelineStatus;
+  type: TimelineType;
   className?: string;
 }) {
-  const style = statusStyles[status];
+  const style = typeStyles[type];
 
   return (
     <span

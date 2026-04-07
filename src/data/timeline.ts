@@ -1,5 +1,5 @@
 import { CalendarRange, Clock3, Layers3 } from "lucide-react";
-import type { TimelineMeta, TimelineStat, TimelineStatus, TimelineStep } from "@/types/timeline";
+import type { TimelineMeta, TimelineStat, TimelineStep, TimelineType } from "@/types/timeline";
 
 export const initialMeta: TimelineMeta = {
   title: "Timeline",
@@ -18,7 +18,7 @@ export const initialTimeline: TimelineStep[] = [
     duration: "2 jours",
     format: "Atelier collectif",
     objective: "Aligner les attentes, la promesse pedagogique et les indicateurs de reussite.",
-    status: "completed",
+    type: "atelier",
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ export const initialTimeline: TimelineStep[] = [
     duration: "1 semaine",
     format: "Cours + cas pratiques",
     objective: "Installer les notions cles avec une progression lisible et rassurante.",
-    status: "completed",
+    type: "cours",
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ export const initialTimeline: TimelineStep[] = [
     duration: "1 semaine",
     format: "Workshop tutore",
     objective: "Faire passer la theorie vers l'action avec un premier projet cadre.",
-    status: "in-progress",
+    type: "atelier",
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ export const initialTimeline: TimelineStep[] = [
     duration: "1 semaine",
     format: "Mentorat + sprint",
     objective: "Developper l'autonomie et professionnaliser les rendus des apprenants.",
-    status: "warning",
+    type: "mentorat",
   },
   {
     id: 5,
@@ -54,15 +54,16 @@ export const initialTimeline: TimelineStep[] = [
     duration: "2 jours",
     format: "Demo day",
     objective: "Valoriser les acquis, mesurer la progression et preparer l'apres-formation.",
-    status: "pending",
+    type: "demo",
   },
 ];
 
-export const statusOptions: { value: TimelineStatus; label: string }[] = [
-  { value: "completed", label: "Termine" },
-  { value: "in-progress", label: "En cours" },
-  { value: "warning", label: "Point cle" },
-  { value: "pending", label: "A venir" },
+export const typeOptions: { value: TimelineType; label: string }[] = [
+  { value: "cours", label: "Cours" },
+  { value: "atelier", label: "Atelier" },
+  { value: "demo", label: "Demo" },
+  { value: "mentorat", label: "Mentorat" },
+  { value: "pause", label: "Pause" },
 ];
 
 export const capabilityItems = [
@@ -79,7 +80,7 @@ export function createEmptyStep(nextId: number): TimelineStep {
     duration: "A definir",
     format: "Workshop",
     objective: "Precisez ici l'objectif de cette etape.",
-    status: "pending",
+    type: "atelier",
   };
 }
 
@@ -89,12 +90,14 @@ export function buildTimelineStats(timeline: TimelineStep[]): TimelineStat[] {
     return format.includes("work") || format.includes("atelier");
   }).length;
 
+  const uniqueTypes = new Set(timeline.map((item) => item.type));
+
   return [
     { label: "Duree totale", value: `${timeline.length} etapes`, icon: CalendarRange },
     { label: "Temps pratique", value: `${practicalSteps * 20}%`, icon: Layers3 },
     {
       label: "Rythme",
-      value: timeline.some((item) => item.status === "in-progress") ? "Actif" : "Planifie",
+      value: uniqueTypes.size > 2 ? "Mixte" : "Lineaire",
       icon: Clock3,
     },
   ];

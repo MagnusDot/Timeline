@@ -23,10 +23,11 @@ function isTimelineStep(value: unknown): value is TimelineStep {
     typeof step.duration === "string" &&
     typeof step.format === "string" &&
     typeof step.objective === "string" &&
-    (step.status === "completed" ||
-      step.status === "in-progress" ||
-      step.status === "pending" ||
-      step.status === "warning")
+    (step.type === "cours" ||
+      step.type === "atelier" ||
+      step.type === "demo" ||
+      step.type === "mentorat" ||
+      step.type === "pause")
   );
 }
 

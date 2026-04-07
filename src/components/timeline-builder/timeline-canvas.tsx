@@ -6,8 +6,8 @@ import {
   TimelineDescription,
   TimelineHeader,
   TimelineItem,
-  TimelineStatusBadge,
   TimelineTime,
+  TimelineTypeBadge,
   TimelineTitle,
 } from "@/components/timeline";
 import type { TimelineMeta, TimelineStep } from "@/types/timeline";
@@ -34,13 +34,13 @@ export const TimelineCanvas = forwardRef<HTMLDivElement, TimelineCanvasProps>(fu
         {timeline.map((step) => (
           <TimelineItem
             key={step.id}
-            status={step.status}
+            type={step.type}
             showConnector={step.id !== timeline[timeline.length - 1]?.id}
-            icon={step.status === "warning" ? <Rocket className="h-4 w-4" strokeWidth={1.5} /> : undefined}
+            icon={step.type === "mentorat" ? <Rocket className="h-4 w-4" strokeWidth={1.5} /> : undefined}
           >
             <TimelineHeader>
               <TimelineTime date={step.date} />
-              <TimelineStatusBadge status={step.status} />
+              <TimelineTypeBadge type={step.type} />
             </TimelineHeader>
 
             <TimelineContent className="transition-colors duration-100 hover:bg-black hover:text-white">

@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import { Plus, Save, X } from "lucide-react";
-import { statusOptions } from "@/data/timeline";
+import { typeOptions } from "@/data/timeline";
 import { Button } from "@/components/ui/button";
-import type { TimelineMeta, TimelineStatus, TimelineStep } from "@/types/timeline";
+import type { TimelineMeta, TimelineStep, TimelineType } from "@/types/timeline";
 
 type EditorModalProps = {
   isOpen: boolean;
@@ -101,7 +101,7 @@ export function EditorModal({
               <div>
                 <p className="editorial-kicker">Etapes</p>
                 <p className="mt-2 text-lg text-muted-foreground">
-                  Modifiez tous les champs, l'ordre et le statut avant d'enregistrer.
+                  Modifiez tous les champs, l'ordre et le type de chaque etape avant d'enregistrer.
                 </p>
               </div>
               <Button variant="secondary" className="gap-3" onClick={onAddStep}>
@@ -192,13 +192,13 @@ function StepEditor({ index, step, onStepChange, onRemoveStep, onMoveStep }: Ste
           />
         </Field>
 
-        <Field label="Statut">
+        <Field label="Type">
           <select
-            value={step.status}
-            onChange={(event) => onStepChange(step.id, "status", event.target.value as TimelineStatus)}
+            value={step.type}
+            onChange={(event) => onStepChange(step.id, "type", event.target.value as TimelineType)}
             className="w-full border-2 border-black bg-white px-4 py-3 outline-none"
           >
-            {statusOptions.map((option) => (
+            {typeOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
