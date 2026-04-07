@@ -2,6 +2,11 @@ import type { ComponentType } from "react";
 
 export type TimelineType = "cours" | "atelier" | "demo" | "mentorat" | "pause";
 
+export type TimelineIconProps = {
+  className?: string;
+  strokeWidth?: string | number;
+};
+
 export type TimelineStep = {
   id: number;
   date: string;
@@ -23,5 +28,5 @@ export type TimelineMeta = {
 export type TimelineStat = {
   label: string;
   value: string;
-  icon: ComponentType<{ className?: string; strokeWidth?: number }>;
+  icon: ComponentType<TimelineIconProps>;
 };
