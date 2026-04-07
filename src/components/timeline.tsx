@@ -25,11 +25,11 @@ const typeStyles: Record<
     badge: string;
   }
 > = {
-  cours: {
+  theorie: {
     dot: "bg-black text-white",
     ring: "ring-white",
     icon: <BookOpenText className="h-4 w-4" strokeWidth={1.5} />,
-    label: "Cours",
+    label: "Théorie",
     badge: "border-black bg-black text-white",
   },
   atelier: {
@@ -68,7 +68,7 @@ export function Timeline({ className, ...props }: TimelineProps) {
 
 export function TimelineItem({
   className,
-  type = "cours",
+  type = "theorie",
   icon,
   showConnector = true,
   children,

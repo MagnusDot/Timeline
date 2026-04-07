@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 
-export type TimelineType = "cours" | "atelier" | "demo" | "mentorat" | "pause";
+export type TimelineType = "theorie" | "atelier" | "demo" | "mentorat" | "pause";
 
 export type TimelineIconProps = {
   className?: string;

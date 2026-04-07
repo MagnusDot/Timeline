@@ -23,7 +23,7 @@ function isTimelineStep(value: unknown): value is TimelineStep {
     typeof step.duration === "string" &&
     typeof step.format === "string" &&
     typeof step.objective === "string" &&
-    (step.type === "cours" ||
+    (step.type === "theorie" ||
       step.type === "atelier" ||
       step.type === "demo" ||
       step.type === "mentorat" ||

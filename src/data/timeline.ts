@@ -25,9 +25,9 @@ export const initialTimeline: TimelineStep[] = [
     date: "Semaine 02",
     title: "Fondamentaux metier et montee en competence",
     duration: "1 semaine",
-    format: "Cours + cas pratiques",
+    format: "Théorie + cas pratiques",
     objective: "Installer les notions cles avec une progression lisible et rassurante.",
-    type: "cours",
+    type: "theorie",
   },
   {
     id: 3,
@@ -59,7 +59,7 @@ export const initialTimeline: TimelineStep[] = [
 ];
 
 export const typeOptions: { value: TimelineType; label: string }[] = [
-  { value: "cours", label: "Cours" },
+  { value: "theorie", label: "Théorie" },
   { value: "atelier", label: "Atelier" },
   { value: "demo", label: "Demo" },
   { value: "mentorat", label: "Mentorat" },
