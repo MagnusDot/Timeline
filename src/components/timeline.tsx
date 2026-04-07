@@ -9,6 +9,7 @@ type TimelineProps = HTMLAttributes<HTMLOListElement>;
 type TimelineItemProps = HTMLAttributes<HTMLLIElement> & {
   status?: TimelineStatus;
   icon?: ReactNode;
+  showConnector?: boolean;
 };
 
 type TimelineTimeProps = TimeHTMLAttributes<HTMLTimeElement> & {
@@ -56,13 +57,14 @@ const statusStyles: Record<
 };
 
 export function Timeline({ className, ...props }: TimelineProps) {
-  return <ol className={cn("relative ml-3 border-l-2 border-black pl-8 md:ml-0 md:pl-10", className)} {...props} />;
+  return <ol className={cn("relative ml-3 pl-8 md:ml-0 md:pl-10", className)} {...props} />;
 }
 
 export function TimelineItem({
   className,
   status = "completed",
   icon,
+  showConnector = true,
   children,
   ...props
 }: TimelineItemProps) {
@@ -70,6 +72,12 @@ export function TimelineItem({
 
   return (
     <li className={cn("group relative pb-10 last:pb-0", className)} {...props}>
+      {showConnector ? (
+        <span
+          aria-hidden="true"
+          className="absolute bottom-0 left-[-1.9375rem] top-[1.5rem] w-0 border-l-2 border-black md:left-[-2.4375rem]"
+        />
+      ) : null}
       <span
         aria-hidden="true"
         className={cn(

@@ -35,6 +35,7 @@ export const TimelineCanvas = forwardRef<HTMLDivElement, TimelineCanvasProps>(fu
           <TimelineItem
             key={step.id}
             status={step.status}
+            showConnector={step.id !== timeline[timeline.length - 1]?.id}
             icon={step.status === "warning" ? <Rocket className="h-4 w-4" strokeWidth={1.5} /> : undefined}
           >
             <TimelineHeader>
